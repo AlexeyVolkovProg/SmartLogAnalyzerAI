@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: postgres-pgvector
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: logsAnalyzeDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready -U postgres -d logsAnalyzeDb"
+      interval: 2s
+      timeout: 20s
+      retries: 10
+    restart: unless-stopped
+
+  fluentBit:
+    image: cr.fluentbit.io/fluent/fluent-bit:3.0
+    container_name: fluentbit
+    ports:
+      - "2020:2020"
+    volumes:
+      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./logs:/logs:ro
+      - ./parsers:/parsers:ro
+    restart: unless-stopped
+
+
+volumes:
+  postgres_data:

@@ -23,9 +23,12 @@ services:
     ports:
       - "2020:2020"
     volumes:
-      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
-      - ./logs:/logs:ro
-      - ./parsers:/parsers:ro
+      - ./fluentbit-configs/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./logs-datasets:/logs-datasets:ro
+      - ./fluentbit-configs/parsers.conf:/parsers:ro
+      - ./fluentbit-configs/enrich.lua:/fluent-bit/etc/enrich.lua:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
 

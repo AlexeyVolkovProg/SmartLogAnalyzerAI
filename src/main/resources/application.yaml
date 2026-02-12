@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: SmartLogAnalyzerAI
+
+  servlet:
+    multipart:
+      max-file-size: 2GB
+      max-request-size: 2GB
+
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/logsAnalyzeDb}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: postgresql
+
+logging:
+  level:
+    liquibase: TRACE
+    org.springframework.boot.autoconfigure.liquibase: DEBUG
+
+server:
+  port: 8080

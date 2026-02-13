@@ -4,6 +4,7 @@ import com.assistant.smartloganalyzerai.dto.LogEntryRequestDto;
 import com.assistant.smartloganalyzerai.service.LogIngestionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,14 +27,19 @@ public class LogIngestionController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> ingestBatch(@RequestBody List<LogEntryRequestDto> logs) {
-        log.info("Received batch of {} log entries", logs.size());
+        try{
+            log.info("Received batch of {} log entries", logs.size());
 
-        int saved = logIngestionService.ingest(logs);
+            int saved = logIngestionService.ingest(logs);
 
-        return ResponseEntity.ok(Map.of(
-                "status", "ok",
-                "ingested", saved
-        ));
+            return ResponseEntity.ok(Map.of(
+                    "status", "ok",
+                    "ingested", saved
+            ));
+        }catch (Exception e){
+            log.info("Error in batch of {} log entries, message {}", logs.size(), e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of());
+        }
     }
 
     /**

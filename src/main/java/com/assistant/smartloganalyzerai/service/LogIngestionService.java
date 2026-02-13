@@ -16,23 +16,32 @@ import java.util.List;
 public class LogIngestionService {
 
     private final LogEntryRepository repository;
+    private final LogVectorService logVectorService;
 
     @Transactional
-    public int ingest(List<LogEntryRequestDto> dto) {
-        List<LogEntry> entities = dto.stream()
+    public int ingest(List<LogEntryRequestDto> logs) {
+        List<LogEntry> entities = logs.stream()
                 .map(this::toEntity)
                 .toList();
 
         repository.saveAll(entities);
+
+        long start = System.currentTimeMillis();
+        logVectorService.store(logs);
+        long end = System.currentTimeMillis();
+
+        log.info("Ingest embedding batch store time: {} ms, batch size: {}",
+                end - start, logs.size());
+
         log.info("Ingested {} log entries", entities.size());
         return entities.size();
     }
 
-    private LogEntry toEntity(LogEntryRequestDto dto) {
-        return LogEntry.builder().serviceName(dto.getServiceName())
-                .timestamp(dto.getTimestamp())
-                .logLevel(dto.getLogLevel())
-                .message(dto.getMessage())
+    private LogEntry toEntity(LogEntryRequestDto log) {
+        return LogEntry.builder().serviceName(log.getServiceName())
+                .timestamp(log.getTimestamp())
+                .logLevel(log.getLogLevel())
+                .message(log.getMessage())
                 .build();
     }
 }

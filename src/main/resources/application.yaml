@@ -2,6 +2,12 @@ spring:
   application:
     name: SmartLogAnalyzerAI
 
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: gemma3:4b-it-q4_K_M
+
   servlet:
     multipart:
       max-file-size: 2GB
@@ -9,7 +15,7 @@ spring:
 
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/logsAnalyzeDb}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/logsAnalyzeDb?currentSchema=log_common}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
@@ -17,13 +23,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: true
+    show-sql: false
     database: postgresql
 
 logging:
   level:
     liquibase: TRACE
-    org.springframework.boot.autoconfigure.liquibase: DEBUG
-
 server:
   port: 8080

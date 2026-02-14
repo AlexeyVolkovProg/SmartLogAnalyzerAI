@@ -21,6 +21,9 @@ public class LogSearchController {
         this.logVectorService = logVectorService;
     }
 
+    /**
+     * Для тестов поиска по логам и замеров по времени
+     */
     @PostMapping("/search")
     public ResponseEntity<List<Map<String, Object>>> search(@RequestBody LogSearchRequestDTO request) {
         List<Document> results = logVectorService.search(request.getQuery(), request.getServiceName());

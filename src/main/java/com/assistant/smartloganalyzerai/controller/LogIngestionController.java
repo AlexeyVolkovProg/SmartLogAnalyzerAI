@@ -1,6 +1,6 @@
 package com.assistant.smartloganalyzerai.controller;
 
-import com.assistant.smartloganalyzerai.dto.LogEntryRequestDto;
+import com.assistant.smartloganalyzerai.dto.api.LogEntryRequestDto;
 import com.assistant.smartloganalyzerai.service.LogIngestionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

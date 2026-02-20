@@ -1,7 +1,7 @@
 package com.assistant.smartloganalyzerai.controller;
 
-import com.assistant.smartloganalyzerai.dto.IncidentAnalysisRequestDTO;
-import com.assistant.smartloganalyzerai.dto.IncidentAnalysisResponseDTO;
+import com.assistant.smartloganalyzerai.dto.api.IncidentAnalysisRequestDTO;
+import com.assistant.smartloganalyzerai.dto.api.IncidentAnalysisResponseDTO;
 import com.assistant.smartloganalyzerai.service.IncidentAnalysisService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

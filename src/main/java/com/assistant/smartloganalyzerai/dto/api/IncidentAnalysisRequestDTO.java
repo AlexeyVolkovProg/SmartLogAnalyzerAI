@@ -1,4 +1,4 @@
-package com.assistant.smartloganalyzerai.dto;
+package com.assistant.smartloganalyzerai.dto.api;
 
 import com.assistant.smartloganalyzerai.dto.enums.AnalysisMode;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -37,7 +37,7 @@ public class IncidentAnalysisRequestDTO {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    private static class TimeRangeDTO{
+    public static class TimeRangeDTO{
         private Instant from;
         private Instant to;
     }

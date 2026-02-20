@@ -1,6 +1,6 @@
 package com.assistant.smartloganalyzerai.controller;
 
-import com.assistant.smartloganalyzerai.dto.LogSearchRequestDTO;
+import com.assistant.smartloganalyzerai.dto.api.LogSearchRequestDTO;
 import com.assistant.smartloganalyzerai.service.LogVectorService;
 import org.springframework.ai.document.Document;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.assistant.smartloganalyzerai.dto;
+package com.assistant.smartloganalyzerai.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -33,7 +33,7 @@ public class IncidentAnalysisResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    private static class LlmResponseDTO {
+    public static class LlmResponseDTO {
 
         @JsonProperty("root_cause")
         private String rootCause;
@@ -52,7 +52,7 @@ public class IncidentAnalysisResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    private static class RelatedLogDTO {
+    public static class RelatedLogDTO {
 
         private String id;
 

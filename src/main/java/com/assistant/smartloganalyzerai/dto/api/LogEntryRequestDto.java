@@ -1,4 +1,4 @@
-package com.assistant.smartloganalyzerai.dto;
+package com.assistant.smartloganalyzerai.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.*;

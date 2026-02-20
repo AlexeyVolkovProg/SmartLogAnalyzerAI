@@ -1,6 +1,6 @@
 package com.assistant.smartloganalyzerai.service;
 
-import com.assistant.smartloganalyzerai.dto.LogEntryRequestDto;
+import com.assistant.smartloganalyzerai.dto.api.LogEntryRequestDto;
 import com.assistant.smartloganalyzerai.entity.LogEntry;
 import com.assistant.smartloganalyzerai.repository.LogEntryRepository;
 import jakarta.transaction.Transactional;

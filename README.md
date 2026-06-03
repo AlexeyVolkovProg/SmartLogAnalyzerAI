@@ -113,15 +113,9 @@ curl -X POST http://localhost:8080/api/incidents/analyze \
   -H 'Content-Type: application/json' \
   -d '{"description": "Hadoop DataNode перестал отвечать", "mode": "INCIDENT_DESCRIPTION", "maxResults": 20}'
 ```
+**Пример анализа инцидента**
 
-Ответ:
-```json
-{
-  "root_cause": "...",
-  "evidence": ["..."],
-  "recommended_actions": ["..."]
-}
-```
+<img width="992" height="642" alt="image" src="https://github.com/user-attachments/assets/c82c7dd3-9bb5-477d-8ed4-e34f527f428a" />
 
 ## Архитектура
 

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: smart-log-analyzer
+data:
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/logsAnalyzeDb?currentSchema=log_common"
+  SPRING_AI_OLLAMA_BASE_URL: "http://ollama:11434"
+  SPRING_JPA_SHOW_SQL: "false"
+  SERVER_PORT: "8080"

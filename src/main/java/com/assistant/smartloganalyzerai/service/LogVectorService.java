@@ -41,15 +41,15 @@ public class LogVectorService {
             filter.append(String.format("service_name == '%s'", request.getServiceName()));
         }
 
-//        if (request.getFrom() != null) {
-//            if (!filter.isEmpty()) filter.append(" && ");
-//            filter.append(String.format("timestamp_epoch >= %d", request.getFrom().getEpochSecond()));
-//        }
-//
-//        if (request.getTo() != null) {
-//            if (!filter.isEmpty()) filter.append(" && ");
-//            filter.append(String.format("timestamp_epoch <= %d", request.getTo().getEpochSecond()));
-//        }
+        if (request.getFrom() != null) {
+            if (!filter.isEmpty()) filter.append(" && ");
+            filter.append(String.format("timestamp_epoch >= %d", request.getFrom().getEpochSecond()));
+        }
+
+        if (request.getTo() != null) {
+            if (!filter.isEmpty()) filter.append(" && ");
+            filter.append(String.format("timestamp_epoch <= %d", request.getTo().getEpochSecond()));
+        }
 
         SearchRequest.Builder builder = SearchRequest.builder()
                 .query(query)

@@ -314,7 +314,7 @@ body {
 
 .logs-table-wrapper {
   overflow-x: auto;
-  max-height: 400px;
+  max-height: 600px;
   overflow-y: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -359,10 +359,9 @@ body {
 }
 
 .cell-message {
-  max-width: 400px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  max-width: 520px;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 /* Log Level Badges */
@@ -411,6 +410,6 @@ body {
   }
 
   .cell-message {
-    max-width: 200px;
+    max-width: 260px;
   }
 }

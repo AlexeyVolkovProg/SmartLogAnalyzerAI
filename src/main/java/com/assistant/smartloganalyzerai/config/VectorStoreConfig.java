@@ -13,11 +13,10 @@ public class VectorStoreConfig {
         return PgVectorStore.builder(jdbcTemplate, embeddingModel)
                 .schemaName("log_common")
                 .vectorTableName("log_vectors")
-                .dimensions(1024)  // длина вектора mxbai-embed-large
+                .dimensions(1024)
                 .distanceType(PgVectorStore.PgDistanceType.COSINE_DISTANCE)
                 .indexType(PgVectorStore.PgIndexType.HNSW)
                 .initializeSchema(true)
                 .build();
     }
-
 }

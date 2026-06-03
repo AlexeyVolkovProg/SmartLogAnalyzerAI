@@ -69,5 +69,4 @@ public class IncidentAnalysisResponseDTO {
         @JsonProperty("similarity_score")
         private Double similarityScore;
     }
-
 }

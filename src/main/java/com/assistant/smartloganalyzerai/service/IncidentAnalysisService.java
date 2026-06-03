@@ -20,18 +20,20 @@ public class IncidentAnalysisService {
     
     private static final String ANALYSIS_PROMPT = """
             Analyze the following incident based on the provided logs.
-            
+
                     Service: {service_name}
                     Service description: {service_description}
                     Incident: {incident_description}
                     Mode: {analysis_mode}
-            
+
+                    IMPORTANT: You MUST respond entirely in Russian language. All field values must be in Russian.
+
                     Provide your analysis as a JSON object with this exact structure, no markdown:
                     {{
-                      "root_cause": "concise root cause statement",
-                      "detailed_explanation": "detailed technical explanation of what happened",
-                      "evidence": ["log evidence 1", "log evidence 2"],
-                      "recommended_actions": ["action 1", "action 2"]
+                      "root_cause": "краткое описание первопричины",
+                      "detailed_explanation": "подробное техническое объяснение произошедшего",
+                      "evidence": ["доказательство из логов 1", "доказательство из логов 2"],
+                      "recommended_actions": ["действие 1", "действие 2"]
                     }}
             """;
 
@@ -43,7 +45,6 @@ public class IncidentAnalysisService {
         long startTime = System.currentTimeMillis();
         String analysisId = UUID.randomUUID().toString();
 
-        // Подготавливаем фильтры для гибридного поиска
         LogSearchRequestDTO searchFilters = new LogSearchRequestDTO();
         searchFilters.setServiceName(request.getServiceName());
         searchFilters.setTopK(request.getTopK());
@@ -52,7 +53,6 @@ public class IncidentAnalysisService {
             searchFilters.setTo(request.getTimeRange().getTo());
         }
 
-        // Контекст, который advisor получит через request.context()
         Map<String, Object> advisorContext = new HashMap<>();
         advisorContext.put("service_name", request.getServiceName());
         advisorContext.put("service_description", request.getServiceDescription());
@@ -60,10 +60,8 @@ public class IncidentAnalysisService {
         advisorContext.put("analysis_mode", request.getMode().name());
         advisorContext.put("search_filters", searchFilters);
 
-        // Создаём advisor
         EnrichSemanticQueryAdvisor enrichSemanticQueryAdvisor = new EnrichSemanticQueryAdvisor(chatClient, logVectorService);
 
-        // Вызываем LLM с advisor'ом
         IncidentAnalysisResponseDTO.LlmResponseDTO llmResponse = chatClient.prompt()
                 .user(u -> u.text(ANALYSIS_PROMPT)
                         .param("service_name", Objects.toString(request.getServiceName(), "unknown"))
@@ -76,13 +74,11 @@ public class IncidentAnalysisService {
                 .call()
                 .entity(IncidentAnalysisResponseDTO.LlmResponseDTO.class);
 
-        // Извлекаем результаты поиска из advisor context
         List<Document> foundDocs = (List<Document>) advisorContext
                 .getOrDefault("log_search_documents", List.of());
         List<String> searchKeywords = (List<String>) advisorContext
                 .getOrDefault("log_search_queries", List.of());
 
-        // Формируем related logs для ответа
         List<IncidentAnalysisResponseDTO.RelatedLogDTO> relatedLogs = foundDocs.stream()
                 .map(doc -> IncidentAnalysisResponseDTO.RelatedLogDTO.builder()
                         .id(doc.getId())

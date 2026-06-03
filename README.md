@@ -135,7 +135,7 @@ curl -X POST http://localhost:8080/api/incidents/analyze \
 
 ```
 com.assistant.smartloganalyzerai/
-├── advisor/       EnrichSemanticQueryAdvisor — RAG-обогащение промпта
+├── advisor/       RAG обогащение промпта
 ├── config/        pgvector, Ollama, Liquibase
 ├── controller/    REST
 ├── dto/           DTO запросов/ответов

@@ -17,12 +17,12 @@
 | Java             | 21                               |
 | Spring Boot      | 4.0                              |
 | Spring AI        | 2.0                              |
-| LLM              | Ollama — `gemma3:4b-it-q4_K_M`   |
-| Эмбеддинги       | Ollama — `mxbai-embed-large`     |
+| LLM              | Ollama `gemma3:4b-it-q4_K_M`   |
+| Эмбеддинги       | Ollama `mxbai-embed-large`     |
 | База данных      | PostgreSQL 16 + pgvector         |
 | Миграции         | Liquibase                        |
-| Сборщик логов    | Fluent Bit 3.0 + Lua             |
-| Frontend         | React 19, TypeScript, Vite 7     |
+| Сборщик логов    | Fluent Bit 3.0                   |
+| Frontend         | React 19, TypeScript              |
 
 ## Быстрый старт
 
